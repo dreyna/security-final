@@ -1,6 +1,5 @@
 package com.example.biblio_security.config;
 
-import com.example.biblio_security.BiblioSecurityApplication;
 import com.example.biblio_security.service.security.CustomUserDetailsService;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Encoders;
@@ -16,7 +15,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.Base64;
 
 @Configuration
 @RequiredArgsConstructor
@@ -36,8 +34,6 @@ public class ApplicationConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    // 👇 ESTE BEAN ES EL QUE TE FALTABA
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         return http.getSharedObject(AuthenticationManagerBuilder.class)
@@ -46,7 +42,7 @@ public class ApplicationConfig {
     }
     public static void main(String[] args) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String password = "456";
+        String password = "789";
         String encoded = encoder.encode(password);
         System.out.println("BCrypt: " + encoded);
 

@@ -32,6 +32,7 @@ public class JwtService {
 
     public String generateToken(UserDetails userDetails, Usuario usuario, List<String> operaciones) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("username", usuario.getUsername());
         claims.put("rol", "ROLE_" + usuario.getRol().getNombre());
         claims.put("operations", operaciones);
 
