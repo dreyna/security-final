@@ -38,17 +38,22 @@ public class FileServiceImpl implements FileService {
 
         for (MultipartFile file : archivos) {
 
-            if (!file.getOriginalFilename().endsWith(".jpg")) {
-                throw new IllegalArgumentException("Solo se permiten archivos JPG");
+            // Obtener extensión del archivo (si existe)
+            String nombreOriginal = file.getOriginalFilename();
+            String extension = "";
+
+            if (nombreOriginal != null && nombreOriginal.contains(".")) {
+                extension = nombreOriginal.substring(nombreOriginal.lastIndexOf("."));
             }
 
-            String nombreGuardado = UUID.randomUUID().toString() + ".jpg";
+            // Generar nombre único con la extensión original
+            String nombreGuardado = UUID.randomUUID().toString() + extension;
 
             Path ruta = Paths.get(uploadPath + nombreGuardado);
             Files.copy(file.getInputStream(), ruta, StandardCopyOption.REPLACE_EXISTING);
 
             Archivo a = new Archivo();
-            a.setNombreOriginal(file.getOriginalFilename());
+            a.setNombreOriginal(nombreOriginal);
             a.setNombreGuardado(nombreGuardado);
             a.setRuta(ruta.toString());
             a.setTamanio(file.getSize());
