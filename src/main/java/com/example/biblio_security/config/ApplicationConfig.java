@@ -42,7 +42,7 @@ public class ApplicationConfig {
     }
     public static void main(String[] args) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String password = "789";
+        String password = "11111";
         String encoded = encoder.encode(password);
         System.out.println("BCrypt: " + encoded);
 

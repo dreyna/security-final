@@ -38,11 +38,11 @@ public class FileServiceImpl implements FileService {
 
         for (MultipartFile file : archivos) {
 
-            if (!file.getOriginalFilename().endsWith(".pdf")) {
-                throw new IllegalArgumentException("Solo se permiten archivos PDF");
+            if (!file.getOriginalFilename().endsWith(".jpg")) {
+                throw new IllegalArgumentException("Solo se permiten archivos JPG");
             }
 
-            String nombreGuardado = UUID.randomUUID().toString() + ".pdf";
+            String nombreGuardado = UUID.randomUUID().toString() + ".jpg";
 
             Path ruta = Paths.get(uploadPath + nombreGuardado);
             Files.copy(file.getInputStream(), ruta, StandardCopyOption.REPLACE_EXISTING);
